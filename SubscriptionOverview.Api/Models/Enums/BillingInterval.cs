@@ -1,7 +1,9 @@
-namespace SubscriptionOverview.Api.Models.Enums;
+namespace SubscriptionOverview.Api.Models.Enums
 
-public enum BillingInterval
 {
-    Monthly,
-    Yearly
+    public enum BillingInterval
+    {
+        Monthly,
+        Yearly
+    }
 }
