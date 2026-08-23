@@ -1,4 +1,4 @@
-namespace SubscriptionOverview.Api.Models;
+namespace SubscriptionOverview.Api.Models.Entities;
 
 public class Category
 {
