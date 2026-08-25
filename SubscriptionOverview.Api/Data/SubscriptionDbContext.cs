@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SubscriptionOverview.Api.Models.Entities;
 
 namespace SubscriptionOverview.Api.Data
 {
-    public class SubscriptionDbContext : DbContext
+    public class SubscriptionDbContext : IdentityDbContext<ApplicationUser>
     {
         public SubscriptionDbContext(DbContextOptions<SubscriptionDbContext> options) : base(options)
         {
