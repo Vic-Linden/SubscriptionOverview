@@ -1,6 +1,8 @@
 using Scalar.AspNetCore;
 using SubscriptionOverview.Api.Data;
 using Microsoft.EntityFrameworkCore;
+using SubscriptionOverview.Api.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,16 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<SubscriptionDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    //password rules
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = true;
+
+    //user rules
+    options.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<SubscriptionDbContext>();
 
 var app = builder.Build();
 
