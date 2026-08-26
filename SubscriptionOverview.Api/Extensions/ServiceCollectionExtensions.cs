@@ -8,6 +8,7 @@ namespace SubscriptionOverview.Api.Extensions
         {
             services.AddSingleton<ITokenService, TokenService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             return services;
         }
