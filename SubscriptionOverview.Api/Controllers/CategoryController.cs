@@ -43,5 +43,17 @@ namespace SubscriptionOverview.Api.Controllers
             var category = await _categoryService.CreateAsync(dto);
             return Ok(category);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, CreateCategoryDto dto)
+        {
+            var category = await _categoryService.UpdateAsync(id, dto);
+
+            if(category is null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
     }
 }
