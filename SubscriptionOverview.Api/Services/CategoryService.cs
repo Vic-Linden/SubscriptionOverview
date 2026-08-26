@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SubscriptionOverview.Api.Data;
 using SubscriptionOverview.Api.DTOs.Category;
+using SubscriptionOverview.Api.Models.Entities;
 
 namespace SubscriptionOverview.Api.Services
 {
@@ -31,6 +32,23 @@ namespace SubscriptionOverview.Api.Services
             {
                 return null;
             }
+
+            return new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+        }
+
+        public async Task<CategoryDto> CreateAsync(CreateCategoryDto dto)
+        {
+            var category = new Category
+            {
+                Name = dto.Name
+            };
+
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
 
             return new CategoryDto
             {
