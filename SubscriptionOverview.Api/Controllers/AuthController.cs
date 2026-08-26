@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SubscriptionOverview.Api.DTOs.Auth;
 using SubscriptionOverview.Api.Services;
 
 namespace SubscriptionOverview.Api.Controllers
@@ -12,6 +13,20 @@ namespace SubscriptionOverview.Api.Controllers
         public AuthController (IAuthService authService)
         {
             _authService = authService;
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterDto dto)
+        {
+            var token = await _authService.RegisterAsync(dto);
+            return Ok(new {token});
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto dto)
+        {
+            var token = await _authService.LoginAsync(dto);
+            return Ok(new {token});
         }
     }
 }
