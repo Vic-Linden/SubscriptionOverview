@@ -75,5 +75,20 @@ namespace SubscriptionOverview.Api.Services
                 Name = category.Name
             };
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+
+            if(category is null)
+            {
+                return false;
+            }
+
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
