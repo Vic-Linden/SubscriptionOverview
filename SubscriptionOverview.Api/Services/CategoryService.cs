@@ -56,5 +56,24 @@ namespace SubscriptionOverview.Api.Services
                 Name = category.Name
             };
         }
+
+        public async Task<CategoryDto?> UpdateAsync(int id, CreateCategoryDto dto)
+        {
+            var category = await _context.Categories.FindAsync(id);
+
+            if(category is null)
+            {
+                return null;
+            }
+
+            category.Name = dto.Name;
+            await _context.SaveChangesAsync();
+
+            return new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+        }
     }
 }
