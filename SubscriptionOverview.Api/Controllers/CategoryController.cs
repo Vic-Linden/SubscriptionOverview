@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SubscriptionOverview.Api.DTOs.Category;
 using SubscriptionOverview.Api.Services;
 
 namespace SubscriptionOverview.Api.Controllers
@@ -33,6 +34,13 @@ namespace SubscriptionOverview.Api.Controllers
                 return NotFound();
             }
 
+            return Ok(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateCategoryDto dto)
+        {
+            var category = await _categoryService.CreateAsync(dto);
             return Ok(category);
         }
     }
