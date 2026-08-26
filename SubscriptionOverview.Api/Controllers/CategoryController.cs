@@ -15,5 +15,12 @@ namespace SubscriptionOverview.Api.Controllers
         {
             _categoryService = categoryService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var categories = await _categoryService.GetAllAsync();
+            return Ok(categories);
+        }
     }
 }
