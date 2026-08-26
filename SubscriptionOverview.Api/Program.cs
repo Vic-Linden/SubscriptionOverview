@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 using System.Text;
+using SubscriptionOverview.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     //user rules
     options.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<SubscriptionDbContext>();
+
+builder.Services.AddApplicationServices();
 
 var jwtKey = builder.Configuration["Jwt:Key"]!;
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
