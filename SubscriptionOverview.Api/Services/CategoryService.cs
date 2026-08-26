@@ -22,5 +22,21 @@ namespace SubscriptionOverview.Api.Services
             })
             .ToListAsync();
         }
+
+        public async Task<CategoryDto?> GetByIdAsync(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+
+            if(category is null)
+            {
+                return null;
+            }
+
+            return new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+        }
     }
 }
