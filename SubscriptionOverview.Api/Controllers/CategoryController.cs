@@ -55,5 +55,18 @@ namespace SubscriptionOverview.Api.Controllers
             }
             return Ok(category);
         }
+        
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var success = await _categoryService.DeleteAsync(id);
+
+            if(!success)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }
