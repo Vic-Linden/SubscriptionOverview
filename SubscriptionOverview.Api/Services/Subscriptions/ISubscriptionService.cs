@@ -6,5 +6,6 @@ namespace SubscriptionOverview.Api.Services.Subscriptions
     {
         Task<List<SubscriptionDto>> GetAllAsync(string userId);
         Task<SubscriptionDto?> GetByIdAsync(int id, string userId); //Nullable reference type
+        Task<SubscriptionDto> CreateAsync(CreateSubscriptionDto dto, string userId);
     }
 }
