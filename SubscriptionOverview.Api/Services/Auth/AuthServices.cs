@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using SubscriptionOverview.Api.Models.Entities;
 using SubscriptionOverview.Api.DTOs.Auth;
+using SubscriptionOverview.Api.Services.Token;
 
-namespace SubscriptionOverview.Api.Services
+namespace SubscriptionOverview.Api.Services.Auth
 {
     public class AuthService : IAuthService
     {

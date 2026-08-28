@@ -1,6 +1,6 @@
 using SubscriptionOverview.Api.DTOs.Auth;
 
-namespace SubscriptionOverview.Api.Services
+namespace SubscriptionOverview.Api.Services.Auth
 {
     public interface IAuthService
     {

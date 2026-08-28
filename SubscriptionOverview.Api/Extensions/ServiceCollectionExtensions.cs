@@ -1,4 +1,8 @@
-using SubscriptionOverview.Api.Services;
+using SubscriptionOverview.Api.Services.Auth;
+using SubscriptionOverview.Api.Services.Token;
+using SubscriptionOverview.Api.Services.Categories;
+
+
 
 namespace SubscriptionOverview.Api.Extensions
 {

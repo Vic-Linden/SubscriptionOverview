@@ -3,7 +3,7 @@ using SubscriptionOverview.Api.Data;
 using SubscriptionOverview.Api.DTOs.Category;
 using SubscriptionOverview.Api.Models.Entities;
 
-namespace SubscriptionOverview.Api.Services
+namespace SubscriptionOverview.Api.Services.Categories
 {
     public class CategoryService : ICategoryService
     {

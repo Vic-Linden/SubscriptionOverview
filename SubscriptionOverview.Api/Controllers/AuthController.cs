@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SubscriptionOverview.Api.DTOs.Auth;
-using SubscriptionOverview.Api.Services;
+using SubscriptionOverview.Api.Services.Auth;
 
 namespace SubscriptionOverview.Api.Controllers
 {

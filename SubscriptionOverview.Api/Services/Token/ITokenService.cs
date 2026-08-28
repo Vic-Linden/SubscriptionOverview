@@ -1,6 +1,6 @@
 using SubscriptionOverview.Api.Models.Entities;
 
-namespace SubscriptionOverview.Api.Services
+namespace SubscriptionOverview.Api.Services.Token
 {
    public interface ITokenService
     {

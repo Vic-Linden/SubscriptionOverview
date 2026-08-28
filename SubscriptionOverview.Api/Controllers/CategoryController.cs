@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SubscriptionOverview.Api.DTOs.Category;
-using SubscriptionOverview.Api.Services;
+using SubscriptionOverview.Api.Services.Categories;
 
 namespace SubscriptionOverview.Api.Controllers
 {
