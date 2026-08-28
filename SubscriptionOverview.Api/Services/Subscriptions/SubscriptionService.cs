@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SubscriptionOverview.Api.Data;
 using SubscriptionOverview.Api.DTOs.Subscription;
+using SubscriptionOverview.Api.Models.Entities;
 
 namespace SubscriptionOverview.Api.Services.Subscriptions
 {
@@ -26,6 +27,27 @@ namespace SubscriptionOverview.Api.Services.Subscriptions
                 BillingInterval = s.BillingInterval,
                 CategoryName = s.Category.Name
             }).ToListAsync();
+        }
+
+        public async Task<SubscriptionDto?> GetByIdAsync(int id, string userId)
+        {
+            var subscription = await _context.Subscriptions
+            .Include(s => s.Category)
+            .FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId);
+
+            if (subscription is null)
+            {
+                return null;
+            }
+
+            return new SubscriptionDto
+            {
+                Id = subscription.Id,
+                Name = subscription.Name,
+                Price = subscription.Price,
+                BillingInterval = subscription.BillingInterval,
+                CategoryName = subscription.Category.Name
+            };
         }
     }
 }
