@@ -1,8 +1,14 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SubscriptionOverview.Api.DTOs.Subscription;
 using SubscriptionOverview.Api.Services.Subscriptions;
 
 namespace SubscriptionOverview.Api.Controllers
 {
+    [Authorize]
+    [ApiController]
+    [Route("api/subscriptions")]
     public class SubscriptionController : ControllerBase
     {
         private readonly ISubscriptionService _subscriptionService;
@@ -10,6 +16,16 @@ namespace SubscriptionOverview.Api.Controllers
         public SubscriptionController(ISubscriptionService subscriptionService)
         {
             _subscriptionService = subscriptionService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<SubscriptionDto>>> GetAll()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var subscriptions = await _subscriptionService.GetAllAsync(userId);
+
+            return subscriptions;
         }
     }
 }
