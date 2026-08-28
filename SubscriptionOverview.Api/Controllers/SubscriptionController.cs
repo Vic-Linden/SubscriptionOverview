@@ -27,5 +27,20 @@ namespace SubscriptionOverview.Api.Controllers
 
             return subscriptions;
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SubscriptionDto>> GetById(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var subscription = await _subscriptionService.GetByIdAsync(id, userId);
+
+            if(subscription is null)
+            {
+                return NotFound();
+            }
+
+            return subscription;
+        }
     }
 }
