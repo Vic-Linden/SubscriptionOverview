@@ -1,6 +1,7 @@
 using SubscriptionOverview.Api.Services.Auth;
 using SubscriptionOverview.Api.Services.Token;
 using SubscriptionOverview.Api.Services.Categories;
+using SubscriptionOverview.Api.Services.Subscriptions;
 
 
 
@@ -13,6 +14,7 @@ namespace SubscriptionOverview.Api.Extensions
             services.AddSingleton<ITokenService, TokenService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
 
             return services;
         }
