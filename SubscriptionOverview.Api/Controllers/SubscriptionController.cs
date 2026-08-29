@@ -42,5 +42,15 @@ namespace SubscriptionOverview.Api.Controllers
 
             return subscription;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<SubscriptionDto>> Create(CreateSubscriptionDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var subscription = await _subscriptionService.CreateAsync(dto, userId);
+            
+            return subscription;
+        }
     }
 }
