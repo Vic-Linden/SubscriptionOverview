@@ -110,5 +110,21 @@ namespace SubscriptionOverview.Api.Services.Subscriptions
                 CategoryName = subscription.Category.Name
             };
         }
+
+        public async Task<bool> DeleteAsync(int id, string userId)
+        {
+            var subscription = await _context.Subscriptions
+            .FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId);
+
+            if(subscription is null)
+            {
+                return false;
+            }
+
+            _context.Subscriptions.Remove(subscription);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
