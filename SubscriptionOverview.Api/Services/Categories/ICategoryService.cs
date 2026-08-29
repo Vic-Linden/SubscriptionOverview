@@ -1,6 +1,6 @@
 using SubscriptionOverview.Api.DTOs.Category;
 
-namespace SubscriptionOverview.Api.Services
+namespace SubscriptionOverview.Api.Services.Categories
 {
     public interface ICategoryService
     {
