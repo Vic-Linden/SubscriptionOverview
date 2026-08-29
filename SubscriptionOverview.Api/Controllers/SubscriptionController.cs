@@ -49,7 +49,22 @@ namespace SubscriptionOverview.Api.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
             var subscription = await _subscriptionService.CreateAsync(dto, userId);
-            
+
+            return subscription;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SubscriptionDto>> Update(int id, CreateSubscriptionDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var subscription = await _subscriptionService.UpdateAsync(id, dto, userId );
+
+            if(subscription is null)
+            {
+                return NotFound();
+            }
+
             return subscription;
         }
     }
