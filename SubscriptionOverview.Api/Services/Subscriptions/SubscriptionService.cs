@@ -83,5 +83,32 @@ namespace SubscriptionOverview.Api.Services.Subscriptions
                 CategoryName = category!.Name
             };
         }
+
+        public async Task<SubscriptionDto?> UpdateAsync(int id, CreateSubscriptionDto dto, string userId)
+        {
+            var subscription = await _context.Subscriptions
+            .Include(s => s.Category)
+            .FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId);
+
+            if(subscription is null)
+            {
+                return null;
+            }
+
+            subscription.Name = dto.Name;
+            subscription.Price = dto.Price;
+            subscription.BillingInterval = dto.BillingInterval;
+            subscription.CategoryId = dto.CategoryId;
+            await _context.SaveChangesAsync();
+
+            return new SubscriptionDto
+            {
+                Id = subscription.Id,
+                Name = subscription.Name,
+                Price = subscription.Price,
+                BillingInterval = subscription.BillingInterval,
+                CategoryName = subscription.Category.Name
+            };
+        }
     }
 }
