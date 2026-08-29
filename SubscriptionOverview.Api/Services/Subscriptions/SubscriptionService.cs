@@ -49,5 +49,39 @@ namespace SubscriptionOverview.Api.Services.Subscriptions
                 CategoryName = subscription.Category.Name
             };
         }
+
+        public async Task<SubscriptionDto> CreateAsync(CreateSubscriptionDto dto, string userId)
+        {
+
+            var categoryExists = await _context.Categories.AnyAsync(c => c.Id == dto.CategoryId);
+
+            if(!categoryExists)
+            {
+                throw new Exception("Category not found.");
+            }
+
+            var subscription = new Subscription
+            {
+                Name = dto.Name,
+                Price = dto.Price,
+                BillingInterval = dto.BillingInterval,
+                CategoryId = dto.CategoryId,
+                UserId = userId
+            };
+
+            _context.Subscriptions.Add(subscription);
+            await _context.SaveChangesAsync();
+
+            var category = await _context.Categories.FindAsync(dto.CategoryId);
+
+            return new SubscriptionDto
+            {
+                Id = subscription.Id,
+                Name = subscription.Name,
+                Price = subscription.Price,
+                BillingInterval = subscription.BillingInterval,
+                CategoryName = category!.Name
+            };
+        }
     }
 }
