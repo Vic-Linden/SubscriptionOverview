@@ -103,5 +103,21 @@ namespace SubscriptionOverview.Api.Services.Payments
                 SubscriptionName = payment.Subscription.Name
             };
         }
+
+        public async Task<bool> DeleteAsync(int id, string userId)
+        {
+            var payment = await _context.Payments
+            .FirstOrDefaultAsync(p => p.Id == id && p.Subscription.UserId == userId);
+
+            if(payment is null)
+            {
+                return true;
+            }
+
+            _context.Payments.Remove(payment);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
