@@ -42,5 +42,15 @@ namespace SubscriptionOverview.Api.Controllers
 
             return payment;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<PaymentDto>> Create(CreatePaymentDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var payment = await _paymentService.CreateAsync(dto, userId);
+
+            return payment;
+        }
     }
 }
