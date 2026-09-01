@@ -78,5 +78,30 @@ namespace SubscriptionOverview.Api.Services.Payments
                 SubscriptionName = subscription!.Name
             };
         }
+
+        public async Task<PaymentDto?> UpdateAsync(int id, CreatePaymentDto dto, string userId)
+        {
+            var payment = await _context.Payments
+            .Include(p => p.Subscription)
+            .FirstOrDefaultAsync(p => p.Id == id && p.Subscription.UserId == userId);
+
+            if(payment is null)
+            {
+                return null;
+            }
+
+            payment.PaidAt = dto.PaidAt;
+            payment.Amount = dto.Amount;
+            payment.SubscriptionId = dto.SubscriptionId;
+            await _context.SaveChangesAsync();
+
+            return new PaymentDto
+            {
+                Id = payment.Id,
+                PaidAt = payment.PaidAt,
+                Amount = payment.Amount,
+                SubscriptionName = payment.Subscription.Name
+            };
+        }
     }
 }
