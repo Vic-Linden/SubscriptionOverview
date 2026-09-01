@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SubscriptionOverview.Api.DTOs.Payment;
 using SubscriptionOverview.Api.Services.Payments;
 
 namespace SubscriptionOverview.Api.Controllers
@@ -14,6 +16,16 @@ namespace SubscriptionOverview.Api.Controllers
         public PaymentController(IPaymentService paymentService)
         {
             _paymentService = paymentService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<PaymentDto>>> GetAll()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var payments = await _paymentService.GetAllAsync(userId);
+
+            return payments;
         }
     }
 }
