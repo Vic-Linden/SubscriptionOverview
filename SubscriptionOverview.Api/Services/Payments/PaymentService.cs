@@ -48,5 +48,35 @@ namespace SubscriptionOverview.Api.Services.Payments
                 SubscriptionName = payment.Subscription.Name
             };
         }
+
+        public async Task<PaymentDto> CreateAsync(CreatePaymentDto dto, string userId)
+        {
+            var subscriptionExists = await _context.Subscriptions.AnyAsync(s => s.Id == dto.SubscriptionId && s.UserId == userId);
+
+            if(!subscriptionExists)
+            {
+                throw new Exception("Subscription not found.");
+            }
+
+            var payment = new Payment
+            {
+               PaidAt = dto.PaidAt,
+               Amount = dto.Amount,
+               SubscriptionId = dto.SubscriptionId
+            };
+
+            _context.Payments.Add(payment);
+            await _context.SaveChangesAsync();
+
+            var subscription = await _context.Subscriptions.FindAsync(dto.SubscriptionId);
+
+            return new PaymentDto
+            {
+                Id = payment.Id,
+                PaidAt = payment.PaidAt,
+                Amount = payment.Amount,
+                SubscriptionName = subscription!.Name
+            };
+        }
     }
 }
