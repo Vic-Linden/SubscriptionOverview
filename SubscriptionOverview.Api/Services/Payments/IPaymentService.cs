@@ -6,5 +6,6 @@ namespace SubscriptionOverview.Api.Services.Payments
     {
         Task<List<PaymentDto>> GetAllAsync(string userId);
         Task<PaymentDto?> GetByIdAsync(int id, string userId); //Nullable reference type
+        Task<PaymentDto> CreateAsync(CreatePaymentDto dto, string userId);
     }
 }
