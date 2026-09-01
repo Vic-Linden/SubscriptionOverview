@@ -67,5 +67,20 @@ namespace SubscriptionOverview.Api.Controllers
 
             return payment;
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var success = await _paymentService.DeleteAsync(id, userId);
+
+            if(!success)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }
