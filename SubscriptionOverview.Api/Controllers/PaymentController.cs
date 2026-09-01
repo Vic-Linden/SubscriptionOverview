@@ -27,5 +27,20 @@ namespace SubscriptionOverview.Api.Controllers
 
             return payments;
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PaymentDto>> GetById(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+            var payment = await _paymentService.GetByIdAsync(id, userId);
+
+            if(payment is null)
+            {
+                return NotFound();
+            }
+
+            return payment;
+        }
     }
 }
