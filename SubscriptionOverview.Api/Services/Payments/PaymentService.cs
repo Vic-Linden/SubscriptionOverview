@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SubscriptionOverview.Api.Data;
 using SubscriptionOverview.Api.DTOs.Payment;
+using SubscriptionOverview.Api.Exceptions;
 using SubscriptionOverview.Api.Models.Entities;
 
 namespace SubscriptionOverview.Api.Services.Payments
@@ -55,7 +56,7 @@ namespace SubscriptionOverview.Api.Services.Payments
 
             if(!subscriptionExists)
             {
-                throw new Exception("Subscription not found.");
+                throw new NotFoundException("Subscription not found.");
             }
 
             var payment = new Payment

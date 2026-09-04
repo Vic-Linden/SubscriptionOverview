@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SubscriptionOverview.Api.Data;
 using SubscriptionOverview.Api.DTOs.Subscription;
+using SubscriptionOverview.Api.Exceptions;
 using SubscriptionOverview.Api.Models.Entities;
 
 namespace SubscriptionOverview.Api.Services.Subscriptions
@@ -57,7 +58,7 @@ namespace SubscriptionOverview.Api.Services.Subscriptions
 
             if(!categoryExists)
             {
-                throw new Exception("Category not found.");
+                throw new NotFoundException("Category not found.");
             }
 
             var subscription = new Subscription
