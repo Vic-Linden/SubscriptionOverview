@@ -22,13 +22,19 @@ namespace SubscriptionOverview.Api.Middleware
             catch(NotFoundException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                context.Response.ContentType = "application.json";
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(JsonSerializer.Serialize(new {error = ex.Message}));
+            }
+            catch(BadRequestException ex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(JsonSerializer.Serialize(new {error = ex.Message}));
             }
             catch(Exception)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "application.json";
+                context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(JsonSerializer.Serialize(new {error = "Something went very wrong."}));
             }
         }
