@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using SubscriptionOverview.Api.Models.Entities;
 using SubscriptionOverview.Api.DTOs.Auth;
 using SubscriptionOverview.Api.Services.Token;
+using SubscriptionOverview.Api.Exceptions;
 
 namespace SubscriptionOverview.Api.Services.Auth
 {
@@ -29,7 +30,7 @@ namespace SubscriptionOverview.Api.Services.Auth
             if(!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(error => error.Description));
-                throw new Exception($"Registration failed: {errors}");
+                throw new BadRequestException($"Registration failed: {errors}");
             }
 
             return _tokenService.GenerateToken(user);
@@ -41,14 +42,14 @@ namespace SubscriptionOverview.Api.Services.Auth
 
             if (user is null)
             {
-                throw new Exception("Invalid email or password");
+                throw new BadRequestException("Invalid email or password");
             }
 
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, dto.Password);
 
             if (!isPasswordValid)
             {
-                throw new Exception("Invalid email or password");
+                throw new BadRequestException("Invalid email or password");
             }
 
             return _tokenService.GenerateToken(user);
