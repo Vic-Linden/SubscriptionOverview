@@ -4,6 +4,6 @@ namespace SubscriptionOverview.Api.Services.Token
 {
    public interface ITokenService
     {
-        string GenerateToken(ApplicationUser user);
+        Task<string> GenerateToken(ApplicationUser user);
     }
 }

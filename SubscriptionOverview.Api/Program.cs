@@ -85,5 +85,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+await app.SeedRolesAsync();
 app.Run();
