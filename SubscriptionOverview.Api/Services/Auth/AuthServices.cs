@@ -33,7 +33,7 @@ namespace SubscriptionOverview.Api.Services.Auth
                 throw new BadRequestException($"Registration failed: {errors}");
             }
 
-            return _tokenService.GenerateToken(user);
+            return await _tokenService.GenerateToken(user);
         }
 
         public async Task<string> LoginAsync(LoginDto dto)
@@ -52,7 +52,7 @@ namespace SubscriptionOverview.Api.Services.Auth
                 throw new BadRequestException("Invalid email or password");
             }
 
-            return _tokenService.GenerateToken(user);
+            return await _tokenService.GenerateToken(user);
         }
     }
 }
