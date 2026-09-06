@@ -16,5 +16,15 @@ namespace SubscriptionOverview.Api.Controllers
         {
             _userManager = userManager;
         }
+
+        [HttpGet("users")]
+        public IActionResult GetAllUsers()
+        {
+            var users = _userManager.Users
+            .Select(u => new {u.Id, u.Email})
+            .ToList();
+
+            return Ok(users);
+        }
     }
 }
