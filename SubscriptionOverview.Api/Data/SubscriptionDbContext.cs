@@ -13,5 +13,14 @@ namespace SubscriptionOverview.Api.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
+
+        //VG-requirement: index on UserId makes queries filtered by user faster.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); 
+
+            modelBuilder.Entity<Subscription>()
+                .HasIndex(s => s.UserId);
+        }
     }
 }
