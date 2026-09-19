@@ -22,7 +22,8 @@ namespace SubscriptionOverview.Api.Services.Auth
             var user = new ApplicationUser
             {
                 UserName = dto.Email,
-                Email = dto.Email
+                Email = dto.Email,
+                DisplayUsername = dto.DisplayUsername
             };
 
             var result = await _userManager.CreateAsync(user, dto.Password);

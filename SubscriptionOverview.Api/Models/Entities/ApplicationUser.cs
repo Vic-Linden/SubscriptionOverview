@@ -4,6 +4,6 @@ namespace SubscriptionOverview.Api.Models.Entities
 {
     public class ApplicationUser : IdentityUser
     {
-        
+        public string DisplayUsername { get; set; } = string.Empty;
     }
 }
