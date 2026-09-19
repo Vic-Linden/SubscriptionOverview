@@ -234,7 +234,7 @@ namespace SubscriptionOverview.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("SubscriptionOverview.Api.Models.Entities.Payment", b =>
@@ -258,7 +258,7 @@ namespace SubscriptionOverview.Api.Migrations
 
                     b.HasIndex("SubscriptionId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("SubscriptionOverview.Api.Models.Entities.Subscription", b =>
@@ -292,7 +292,7 @@ namespace SubscriptionOverview.Api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Subscriptions");
+                    b.ToTable("Subscriptions", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
