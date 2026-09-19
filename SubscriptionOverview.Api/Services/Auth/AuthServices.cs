@@ -23,7 +23,7 @@ namespace SubscriptionOverview.Api.Services.Auth
             {
                 UserName = dto.Email,
                 Email = dto.Email,
-                Username = dto.Username
+                DisplayUsername = dto.DisplayUsername
             };
 
             var result = await _userManager.CreateAsync(user, dto.Password);

@@ -32,7 +32,7 @@ namespace SubscriptionOverview.Api.Services.Token
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email!),
-                new Claim("username", user.Username)
+                new Claim("username", user.DisplayUsername)
             };
 
             // Add one claim per role the user has like Admin.

@@ -7,7 +7,7 @@ namespace SubscriptionOverview.Api.DTOs.Auth
     {
         [Required]
         [MaxLength(50)]
-        public string Username { get; set; } = string.Empty;
+        public string DisplayUsername { get; set; } = string.Empty;
         [Required]
         public string Email { get; set; } = string.Empty;
         [Required]
