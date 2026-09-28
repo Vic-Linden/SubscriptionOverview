@@ -74,11 +74,8 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionHandling>();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.MapScalarApiReference();
-}
+app.MapOpenApi();
+app.MapScalarApiReference();
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
